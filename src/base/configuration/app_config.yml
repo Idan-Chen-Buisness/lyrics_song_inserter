@@ -7,17 +7,14 @@ app:
 
 mongo_db:
   connection_url: mongodb+srv://larityai1:YmphRV89c6CxDjkj@cluster0.txarrod.mongodb.net/?retryWrites=true&w=majority
+  database: song_lyrics
+  collection: song_test
 
 kworb:
   general:
-    - https://kworb.net/youtube # Most viewed videos in YouTube the past 24 hours
-    -  https://kworb.net/youtube/trending.html # Music videos trending worldwide
     -  https://kworb.net/youtube/topvideos.html # Most viewed music videos of all time
-  youtube_videos:
-    - https://kworb.net/youtube/insights/kr.html # korean_youtube
+  youtube_urls:
+#    - https://kworb.net/youtube/insights/kr.html # korean_youtube
     - https://kworb.net/youtube/insights/es_daily.html # spain_youtube
     - https://kworb.net/youtube/insights/il.html # israel_youtube
-  spotify_videos:
-    - https://kworb.net/spotify/country/es_daily.html  #spain_spotify
-    - https://kworb.net/spotify/country/kr_daily.html # korean_spotify
-    - https://kworb.net/spotify/country/il_daily.html #israel_spotify
+

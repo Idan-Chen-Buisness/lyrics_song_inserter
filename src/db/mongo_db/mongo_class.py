@@ -35,22 +35,32 @@ class MongoDBClient:
 
     def insert_documents(self, documents, check_if_already_exist=True):
         """
-        Inserts a list of documents into the collection.
+        Inserts a list of documents into the collection one by one.
+        :param check_if_already_exist: check if already exist
         :param documents: List of documents to be inserted
         :return: Inserted IDs of the documents
         """
         documents_dont_exist = []
         if check_if_already_exist:
-            for document in documents:
-                if self.is_document_already_exists(document=document):
+            self.logger.info("Check if the documents already exists")
+            for index, document in enumerate(documents):
+                if not self.is_document_already_exists(document=document):
+                    self.logger.debug(f"{index} - Document {document['song_name']} DOESN'T EXIST")
                     documents_dont_exist.append(document)
+                else:
+                    self.logger.debug(f"{index} - Document {document['song_name']} EXIST")
+
         else:
             documents_dont_exist = documents
 
-        result = self.collection.insert_many(documents_dont_exist)
+        counter = 0
+        self.logger.info("Start insert documents to db")
+        for document in documents_dont_exist:
+            result = self.collection.insert_one(document)
+            counter += 1
+
         self.logger.debug(
-            f"Inserted {len(documents_dont_exist)} documents into {self.database_name}.{self.collection_name}")
-        return result.inserted_ids
+            f"Inserted {counter} documents into {self.database_name}.{self.collection_name}")
 
     def is_document_already_exists(self, document):
         song_regex = re.compile(re.escape(document['song_name']), re.IGNORECASE)
@@ -73,8 +83,6 @@ class MongoDBClient:
         """
         results = self.collection.find(query)
         found_documents = list(results)
-        self.logger.debug(
-            f"Found {len(found_documents)} documents in {self.database_name}.{self.collection_name} with query {query}")
         return found_documents
 
     def update_document(self, query, new_values):
