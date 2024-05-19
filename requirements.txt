@@ -7,3 +7,6 @@ pymongo
 PyYAML
 pydantic
 lxml
+langdetect
+lyricsgenius
+html5lib

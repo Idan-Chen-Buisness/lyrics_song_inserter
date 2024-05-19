@@ -1,6 +1,5 @@
 logger:
   level: DEBUG
-  file_path : logs/application.log
 
 app:
   timeout: 90
@@ -14,7 +13,9 @@ kworb:
   general:
     -  https://kworb.net/youtube/topvideos.html # Most viewed music videos of all time
   youtube_urls:
-#    - https://kworb.net/youtube/insights/kr.html # korean_youtube
-    - https://kworb.net/youtube/insights/es_daily.html # spain_youtube
-    - https://kworb.net/youtube/insights/il.html # israel_youtube
+    Korean: https://kworb.net/youtube/insights/kr.html # korean_youtube
+    Spanish:  https://kworb.net/youtube/insights/es.html # spain_youtube
+    Hebrew: https://kworb.net/youtube/insights/il.html # israel_youtube
 
+lyrics:
+  genius_api_key: Cg8iQ0MxnMUkgqKpRrSHSQCx9lvxaCjv9iNgBpaQvea3N85S4mfPfo9imT3p5AHH

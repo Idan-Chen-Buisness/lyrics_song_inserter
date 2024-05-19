@@ -33,6 +33,28 @@ class MongoDBClient:
             self.logger.debug(f"Connection failed: {err}")
             return False
 
+    def insert_document(self, document, check_if_already_exist=True):
+        """
+        Inserts a list of documents into the collection one by one.
+        :param document:
+        :param check_if_already_exist: check if already exist
+        :return: Inserted IDs of the documents
+        """
+        if check_if_already_exist:
+            self.logger.info("Check if the documents already exists")
+            if not self.is_document_already_exists(document=document):
+                self.logger.debug(f"Document {document['song_name']} DOESN'T EXIST")
+                result = self.collection.insert_one(document)
+            else:
+                self.logger.debug(f"Document {document['song_name']} EXIST")
+
+        else:
+            self.logger.info("Start insert documents to db")
+            result = self.collection.insert_one(document)
+
+            self.logger.debug(
+                f"Inserted document {document['song_name']} into {self.database_name}.{self.collection_name}")
+
     def insert_documents(self, documents, check_if_already_exist=True):
         """
         Inserts a list of documents into the collection one by one.
@@ -65,9 +87,11 @@ class MongoDBClient:
     def is_document_already_exists(self, document):
         song_regex = re.compile(re.escape(document['song_name']), re.IGNORECASE)
         artist_regex = re.compile(re.escape(document['artist_names']), re.IGNORECASE)
+        target_language = re.compile(re.escape(document['target_language']), re.IGNORECASE)
         query = {
             "song_name": {"$regex": song_regex},
-            "artist_names": {"$regex": artist_regex}
+            "artist_names": {"$regex": artist_regex},
+            "target_language": {"$regex": target_language}
         }
         found_documents = self.find_documents(query)
         if len(found_documents):

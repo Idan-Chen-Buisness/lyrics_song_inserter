@@ -7,7 +7,6 @@ class LoguruLogger:
     def __init__(self, name):
         self.logger_config = Config().get_value('logger')
         self.log_level = self.logger_config['level']
-        self.log_file_path = self.logger_config['file_path']
 
         self.name = name
 
@@ -17,12 +16,6 @@ class LoguruLogger:
         # configure console handler
         logger.add(
             sys.stderr,
-            level=self.log_level
-        )
-
-        # configure the file handler
-        logger.add(
-            self.log_file_path,
             level=self.log_level
         )
 
