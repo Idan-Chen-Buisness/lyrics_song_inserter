@@ -7,7 +7,7 @@ app:
 mongo_db:
   connection_url: mongodb+srv://larityai1:YmphRV89c6CxDjkj@cluster0.txarrod.mongodb.net/?retryWrites=true&w=majority
   database: song_lyrics
-  collection: song_test
+  collection: song_translations
 
 kworb:
   general:
