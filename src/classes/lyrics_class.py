@@ -75,9 +75,11 @@ class Lyrics:
 
     def is_lyrics_language_the_same_as_the_target(self, song_name, artist, target_language):
         lyrics = self.get_lyrics(song_name=song_name, artist_name=artist)
-        song_language = self.detect_language(lyrics=lyrics)
-        self.logger.debug(f"SONG: {song_name}, LYRICS: {song_language}, TARGET: {target_language} ")
-        return target_language.lower() == song_language.lower()
+        if lyrics:
+            song_language = self.detect_language(lyrics=lyrics)
+            self.logger.debug(f"SONG: {song_name}, LYRICS: {song_language}, TARGET: {target_language} ")
+            return target_language.lower() == song_language.lower()
+        return False
 
     @staticmethod
     def detect_language(lyrics):
@@ -89,6 +91,7 @@ class Lyrics:
             return "Could not detect language"
 
     def get_lyrics(self, song_name, artist_name=None):
+
         query = song_name + " " + artist_name
         genius = lg.Genius(self.api_key, timeout=120, retries=5)
         search_results = genius.search_songs(query)
@@ -104,12 +107,16 @@ class Lyrics:
                 song_obj = genius.search_song(song_id=song['id'])
                 if song_obj:
                     break
-        song_obj = genius.search_song(song_id=song['id'])
-        song_lyrics = song_obj.lyrics
-        clean1 = "\n".join(song_lyrics.split('\n')[1:])
-        cleaned_string = re.sub(r'\d+Embed', '', clean1)
-        lyrics = re.sub(r'Embed$', '', cleaned_string)
-        filtered_lyrics = [line for line in lyrics.split('\n') if not re.search(r'\[.*?\]', line)]
-        cleaned_lyrics = '\n'.join(filtered_lyrics)
-        self.logger.debug(f"Song name: {song_name} Lyrics retrieved successfully")
-        return cleaned_lyrics
+        try:
+            song_obj = genius.search_song(song_id=song['id'])
+            song_lyrics = song_obj.lyrics
+        except Exception as e:
+            return None
+        else:
+            clean1 = "\n".join(song_lyrics.split('\n')[1:])
+            cleaned_string = re.sub(r'\d+Embed', '', clean1)
+            lyrics = re.sub(r'Embed$', '', cleaned_string)
+            filtered_lyrics = [line for line in lyrics.split('\n') if not re.search(r'\[.*?\]', line)]
+            cleaned_lyrics = '\n'.join(filtered_lyrics)
+            self.logger.debug(f"Song name: {song_name} Lyrics retrieved successfully")
+            return cleaned_lyrics
