@@ -1,0 +1,21 @@
+logger:
+  level: DEBUG
+  file_path : logs/application.log
+
+app:
+  timeout: 90
+
+mongo_db:
+  connection_url: mongodb+srv://larityai1:YmphRV89c6CxDjkj@cluster0.txarrod.mongodb.net/?retryWrites=true&w=majority
+
+kworb:
+  lst_of_urls:
+    - https://kworb.net/youtube # Most viewed videos in YouTube the past 24 hours
+    - https://kworb.net/youtube/trending.html # Music videos trending worldwide
+    - https://kworb.net/youtube/topvideos.html # Most viewed music videos of all time
+    - https://kworb.net/youtube/insights/il.html # YouTube Israel - Week ending
+    - https://kworb.net/spotify/country/il_daily.html # Spotify Israel - Week ending
+    - https://kworb.net/spotify/country/es_daily.html  #Spotify Daily Chart - Spain
+    - https://kworb.net/youtube/insights/es_daily.html # YouTube Spain Daily Chart
+    - https://kworb.net/spotify/country/kr_daily.html # spotify korean daily
+    - https://kworb.net/youtube/insights/kr.html # spotify YouTube weekly
