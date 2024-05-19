@@ -6,3 +6,4 @@ pyaml
 pymongo
 PyYAML
 pydantic
+lxml
