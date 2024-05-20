@@ -27,7 +27,7 @@ class KworbClass:
     def add_metadata_to_list_all_time_hits(self, lst_of_songs):
         updated_lst_of_songs = []
         for song in lst_of_songs:
-            for lang in ['Korean', 'Spanish', 'Hebrew']:
+            for lang in ['Portuguese','Korean', 'Spanish', 'Hebrew']:
                 new_song = copy.deepcopy(song)  # Create a new copy of the song dictionary
                 new_song['is_published'] = False
                 new_song['similarity_score'] = None
@@ -51,8 +51,10 @@ class KworbClass:
 
     def data_cleaning_all_times_hits(self, df, column_name):
         df = df[~df[column_name].str.contains('short', case=False)]
-        df = df[df[column_name].str.contains(' - ', case=False)]
         df = df[~df[column_name].apply(self.contains_arabic)]
+        df[column_name] = df[column_name].apply(self.remove_after_official)
+        df = df[df[column_name].str.contains(' - ', case=False)]
+        df['song_name'] = df[column_name].apply(lambda video: video.split(' - ')[1].strip())
         df['song_name'] = df[column_name].apply(lambda video: video.split(' - ')[1].strip())
         df['artist_names'] = df[column_name].apply(lambda video: video.split(' - ')[0].strip())
         df = df[['song_name', 'artist_names']]
@@ -61,8 +63,8 @@ class KworbClass:
         return lst_of_songs
 
     def fetch_songs(self):
-        yield from self.extract_youtube()
         yield from self.extract_general_url()
+        yield from self.extract_youtube()
 
     def extract_general_url(self):
         # extract the html from the website and clean the data
@@ -85,3 +87,13 @@ class KworbClass:
     def contains_arabic(text):
         arabic_pattern = re.compile(r'[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]')
         return arabic_pattern.search(text) is not None
+
+    @staticmethod
+    def remove_after_official(text):
+        lower_text = text.lower()
+        keyword = 'official'
+        keyword_index = lower_text.find(keyword)
+
+        if keyword_index != -1:
+            return text[:keyword_index - 1].strip()
+        return text
