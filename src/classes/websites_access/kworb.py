@@ -27,7 +27,8 @@ class KworbClass:
     def add_metadata_to_list_all_time_hits(self, lst_of_songs):
         updated_lst_of_songs = []
         for song in lst_of_songs:
-            for lang in ['Portuguese','Korean', 'Spanish', 'Hebrew']:
+            # for lang in ['Portuguese','Korean', 'Spanish', 'Hebrew']:
+            for lang in ['Portuguese', 'Spanish', 'Hebrew']:
                 new_song = copy.deepcopy(song)  # Create a new copy of the song dictionary
                 new_song['is_published'] = False
                 new_song['similarity_score'] = None
@@ -44,7 +45,7 @@ class KworbClass:
         df['song_name'] = df[column_name].apply(lambda video: video.split(' - ')[1].strip())
         df['artist_names'] = df[column_name].apply(lambda video: video.split(' - ')[0].strip())
         df = df.rename(columns={'Wks': 'week'})
-        df = df[['song_name', 'artist_names', 'week','target_language']]
+        df = df[['song_name', 'artist_names', 'week', 'target_language']]
         lst_of_songs = df.to_dict(orient="records")
         lst_of_songs = self.add_metadata_to_list_youtube(lst_of_songs=lst_of_songs)
         return lst_of_songs
