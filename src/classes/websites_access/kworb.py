@@ -28,7 +28,7 @@ class KworbClass:
         updated_lst_of_songs = []
         for song in lst_of_songs:
             # for lang in ['Portuguese','Korean', 'Spanish', 'Hebrew']:
-            for lang in ['Portuguese', 'Spanish', 'Hebrew']:
+            for lang in ['Portuguese', 'Spanish','Korean', 'Hebrew']:
                 new_song = copy.deepcopy(song)  # Create a new copy of the song dictionary
                 new_song['is_published'] = False
                 new_song['similarity_score'] = None
@@ -65,7 +65,7 @@ class KworbClass:
 
     def fetch_songs(self):
         yield from self.extract_youtube()
-        # yield from self.extract_general_url()
+        yield from self.extract_general_url()
 
     def extract_general_url(self):
         # extract the html from the website and clean the data

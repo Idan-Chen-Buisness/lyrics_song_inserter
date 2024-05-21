@@ -14,7 +14,7 @@ kworb:
     -  https://kworb.net/youtube/topvideos.html # Most viewed music videos of all time
   youtube_urls:
     Portuguese : https://kworb.net/youtube/insights/pt.html # Portugal _youtube
-    #Korean: https://kworb.net/youtube/insights/kr.html # korean_youtube
+    Korean: https://kworb.net/youtube/insights/kr.html # korean_youtube
     Spanish:  https://kworb.net/youtube/insights/es.html # spain_youtube
     Hebrew: https://kworb.net/youtube/insights/il.html # israel_youtube
 
