@@ -65,7 +65,7 @@ class KworbClass:
 
     def fetch_songs(self):
         yield from self.extract_youtube()
-        yield from self.extract_general_url()
+        #yield from self.extract_general_url()
 
     def extract_general_url(self):
         # extract the html from the website and clean the data
