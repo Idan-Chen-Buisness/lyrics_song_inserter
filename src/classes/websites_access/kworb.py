@@ -27,8 +27,7 @@ class KworbClass:
     def add_metadata_to_list_all_time_hits(self, lst_of_songs):
         updated_lst_of_songs = []
         for song in lst_of_songs:
-            # for lang in ['Portuguese','Korean', 'Spanish', 'Hebrew']:
-            for lang in ['Portuguese', 'Spanish','Korean', 'Hebrew']:
+            for lang in ['Hindi','Portuguese','Korean', 'Spanish', 'Hebrew']:
                 new_song = copy.deepcopy(song)  # Create a new copy of the song dictionary
                 new_song['is_published'] = False
                 new_song['similarity_score'] = None

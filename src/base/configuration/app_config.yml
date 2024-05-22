@@ -13,6 +13,7 @@ kworb:
   general:
     -  https://kworb.net/youtube/topvideos.html # Most viewed music videos of all time
   youtube_urls:
+    Hindi : https://kworb.net/youtube/insights/in.html # India  _youtube
     Portuguese : https://kworb.net/youtube/insights/pt.html # Portugal _youtube
     Korean: https://kworb.net/youtube/insights/kr.html # korean_youtube
     Spanish:  https://kworb.net/youtube/insights/es.html # spain_youtube
