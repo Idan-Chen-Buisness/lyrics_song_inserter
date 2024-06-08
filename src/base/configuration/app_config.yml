@@ -13,7 +13,7 @@ kworb:
   general:
     -  https://kworb.net/youtube/topvideos.html # Most viewed music videos of all time
   youtube_urls:
-    Hindi : https://kworb.net/youtube/insights/in.html # India  _youtube
+    French : https://kworb.net/youtube/insights/fr.html # France  _youtube
     Portuguese : https://kworb.net/youtube/insights/pt.html # Portugal _youtube
     Korean: https://kworb.net/youtube/insights/kr.html # korean_youtube
     Spanish:  https://kworb.net/youtube/insights/es.html # spain_youtube
@@ -21,3 +21,14 @@ kworb:
 
 lyrics:
   genius_api_key: Cg8iQ0MxnMUkgqKpRrSHSQCx9lvxaCjv9iNgBpaQvea3N85S4mfPfo9imT3p5AHH
+
+spotify:
+  auth:
+    client_id: 'bd52d008d362474296b743b1968c9e32'
+    client_secret: '82302e70699744ca9dee1e121bd86a1e'
+  playlists_id:
+    French: '37i9dQZEVXbIPWwFssbupI'
+    Portuguese: '37i9dQZEVXbKyJS56d1pgi'
+    Korean: '37i9dQZEVXbNxXF4SkHj9F'
+    Spanish: '37i9dQZEVXbNFJfN1Vw8d9'
+    Hebrew: '37i9dQZEVXbJ6IpvItkve3'

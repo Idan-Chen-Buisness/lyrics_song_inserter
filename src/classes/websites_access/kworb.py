@@ -19,6 +19,7 @@ class KworbClass:
             new_song = copy.deepcopy(song)  # Create a new copy of the song dictionary
             new_song['is_published'] = False
             new_song['similarity_score'] = None
+            new_song['type'] = "kworb"
             new_song['error'] = None
             new_song['date_created'] = datetime.now()
             updated_lst_of_songs.append(new_song)
@@ -27,11 +28,13 @@ class KworbClass:
     def add_metadata_to_list_all_time_hits(self, lst_of_songs):
         updated_lst_of_songs = []
         for song in lst_of_songs:
-            for lang in ['Hindi','Portuguese','Korean', 'Spanish', 'Hebrew']:
+            for lang in ['Hindi','Korean']:
+            #for lang in ['Hindi','Portuguese','Korean', 'Spanish', 'Hebrew']:
                 new_song = copy.deepcopy(song)  # Create a new copy of the song dictionary
                 new_song['is_published'] = False
                 new_song['similarity_score'] = None
                 new_song['error'] = None
+
                 new_song['date_created'] = datetime.now()
                 new_song['target_language'] = lang
                 updated_lst_of_songs.append(new_song)
@@ -64,7 +67,7 @@ class KworbClass:
 
     def fetch_songs(self):
         yield from self.extract_youtube()
-        #yield from self.extract_general_url()
+        # yield from self.extract_general_url()
 
     def extract_general_url(self):
         # extract the html from the website and clean the data

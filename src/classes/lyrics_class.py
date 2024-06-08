@@ -104,9 +104,12 @@ class Lyrics:
         for hit in search_results['hits']:
             if artist_name.lower().split(' ')[0] in hit['result']['artist_names'].lower():
                 song = hit['result']
-                song_obj = genius.search_song(song_id=song['id'])
-                if song_obj:
-                    break
+                try:
+                    song_obj = genius.search_song(song_id=song['id'])
+                    if song_obj:
+                        break
+                except Exception:
+                    return None
         try:
             song_obj = genius.search_song(song_id=song['id'])
             song_lyrics = song_obj.lyrics
